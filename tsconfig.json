@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "sourceMap": true,
+        "outDir": "dist"
+    },
+    "include": [
+        "./src/**/*",
+        "node_modules/ts-jest/globals.d.ts",
+        "node_modules/ts-jest/globals.d.ts"
+    ],
+    "exclude": ["node_modules"]
+}

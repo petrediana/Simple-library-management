@@ -7,7 +7,8 @@ export class InMemoryStore implements BookStore {
     private readonly availableBooks: Book[];
 
     public constructor() {
-        this.books = this.availableBooks = [];
+        this.books = [];
+        this.availableBooks = [];
     }
 
     public add(book: Book): void {

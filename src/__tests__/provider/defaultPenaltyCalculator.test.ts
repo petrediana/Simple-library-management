@@ -1,5 +1,5 @@
 import { DateTimeProvider } from "../../provider/time/contracts";
-import { DefaultPenaltyCalculator } from "../../provider/penalty";
+import { DefaultPenaltyCalculator } from "../../provider";
 import { Book, Borrowed } from "../../book";
 
 class MockTimeProvider implements DateTimeProvider {

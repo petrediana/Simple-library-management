@@ -1,4 +1,4 @@
-import { InMemoryStore } from "../../store/inMemory";
+import { InMemoryStore } from "../../store";
 import { Book } from "../../book";
 
 describe("InMemoryStore", () => {

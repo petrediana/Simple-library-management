@@ -1,12 +1,12 @@
 import { Book } from "../book";
 import { Borrowed } from "../book";
-import { DefaultDateTimeProvider } from "../provider/time";
+import { DefaultDateTimeProvider } from "../provider";
 import { DateTimeProvider } from "../provider/time/contracts";
 import { BookStore } from "../contracts";
 import { LoggerProvider } from "../provider/logger/contracts";
 import { PenaltyProvider } from "../provider/penalty/contracts";
-import { ConsoleLoggerProvider } from "../provider/logger";
-import { DefaultPenaltyCalculator } from "../provider/penalty";
+import { ConsoleLoggerProvider } from "../provider";
+import { DefaultPenaltyCalculator } from "../provider";
 
 /**
  * Represents a library that implements the BookStore interface.

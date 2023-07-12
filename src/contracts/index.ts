@@ -1,5 +1,5 @@
-import {Book} from "../book";
-import {Borrowed} from "../book";
+import { Book } from "../book";
+import { Borrowed } from "../book";
 
 export interface BookStore {
     add(book: Book): void;

@@ -1,6 +1,6 @@
-import {BookStore} from "../../contracts";
-import {Book} from "../../book";
-import {Borrowed} from "../../book";
+import { BookStore } from "../../contracts";
+import { Book } from "../../book";
+import { Borrowed } from "../../book";
 
 export class InMemoryStore implements BookStore {
     private readonly books: Book[];
@@ -16,12 +16,16 @@ export class InMemoryStore implements BookStore {
     }
 
     public isAvailable(book: Book): boolean {
-        return this.availableBooks.some((available) => available.name === book.name);
+        return this.availableBooks.some(
+            (available) => available.name === book.name,
+        );
     }
 
     public borrow(book: Book, startingFrom: Date): Borrowed {
         if (this.isAvailable(book)) {
-            const index = this.availableBooks.findIndex((available) => available.name === book.name);
+            const index = this.availableBooks.findIndex(
+                (available) => available.name === book.name,
+            );
             this.availableBooks.splice(index, 1);
 
             return new Borrowed(book, startingFrom.getTime());
@@ -32,7 +36,9 @@ export class InMemoryStore implements BookStore {
 
     public returnBack(book: Book): void {
         if (!this.isFromThisStore(book)) {
-            throw new Error("The book you are trying to return does not belong to this store!");
+            throw new Error(
+                "The book you are trying to return does not belong to this store!",
+            );
         }
 
         this.availableBooks.push(book);

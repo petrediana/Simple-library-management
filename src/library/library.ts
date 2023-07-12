@@ -1,12 +1,12 @@
-import {Book} from "../book";
-import {Borrowed} from "../book";
-import {DefaultDateTimeProvider} from "../provider/time";
-import {DateTimeProvider} from "../provider/time/contracts";
-import {BookStore} from "../contracts";
-import {LoggerProvider} from "../provider/logger/contracts";
-import {PenaltyProvider} from "../provider/penalty/contracts";
-import {ConsoleLoggerProvider} from "../provider/logger";
-import {DefaultPenaltyCalculator} from "../provider/penalty";
+import { Book } from "../book";
+import { Borrowed } from "../book";
+import { DefaultDateTimeProvider } from "../provider/time";
+import { DateTimeProvider } from "../provider/time/contracts";
+import { BookStore } from "../contracts";
+import { LoggerProvider } from "../provider/logger/contracts";
+import { PenaltyProvider } from "../provider/penalty/contracts";
+import { ConsoleLoggerProvider } from "../provider/logger";
+import { DefaultPenaltyCalculator } from "../provider/penalty";
 
 export class Library implements BookStore {
     private readonly store: BookStore;
@@ -16,9 +16,14 @@ export class Library implements BookStore {
     private readonly loggerProvider: LoggerProvider;
     private readonly penaltyProvider: PenaltyProvider;
 
-    public constructor(store: BookStore, dateTimeProvider: DateTimeProvider = new DefaultDateTimeProvider(),
-                       loggerProvider: LoggerProvider = new ConsoleLoggerProvider(),
-                       penaltyProvider: PenaltyProvider = new DefaultPenaltyCalculator(dateTimeProvider)) {
+    public constructor(
+        store: BookStore,
+        dateTimeProvider: DateTimeProvider = new DefaultDateTimeProvider(),
+        loggerProvider: LoggerProvider = new ConsoleLoggerProvider(),
+        penaltyProvider: PenaltyProvider = new DefaultPenaltyCalculator(
+            dateTimeProvider,
+        ),
+    ) {
         this.store = store;
         this.borrowedBooks = [];
         this.dateTimeProvider = dateTimeProvider;
@@ -38,7 +43,10 @@ export class Library implements BookStore {
         return this.store.isFromThisStore(book);
     }
 
-    public borrow(book: Book, startingFrom: Date = this.dateTimeProvider.getCurrentDateTime()): Borrowed {
+    public borrow(
+        book: Book,
+        startingFrom: Date = this.dateTimeProvider.getCurrentDateTime(),
+    ): Borrowed {
         const borrowed = this.store.borrow(book, startingFrom);
         this.borrowedBooks.push(borrowed);
 
@@ -46,14 +54,18 @@ export class Library implements BookStore {
     }
 
     public returnBack(book: Book): void {
-        const borrowed = this.borrowedBooks.find((borrowed) => borrowed.book.name === book.name);
+        const borrowed = this.borrowedBooks.find(
+            (borrowed) => borrowed.book.name === book.name,
+        );
         if (!borrowed) {
             throw new Error("This book was not borrowed from this library!");
         }
-        
+
         const penalty = this.penaltyProvider.calculate(borrowed);
         if (penalty !== 0) {
-            this.loggerProvider.log(`You have to pay this penalty: **${penalty}**!`)
+            this.loggerProvider.log(
+                `You have to pay this penalty: **${penalty}**!`,
+            );
         }
 
         this.store.returnBack(book);
@@ -75,12 +87,16 @@ export class Library implements BookStore {
     }
 
     public displayAvailableBooks(): void {
-        this.loggerProvider.log("These are all the books available to be borrowed in the library...");
+        this.loggerProvider.log(
+            "These are all the books available to be borrowed in the library...",
+        );
         this.loggerProvider.log(this.store.getAvailable());
     }
 
     public displayBorrowedBooks(): void {
-        this.loggerProvider.log("These are all the borrowed books from the library...");
+        this.loggerProvider.log(
+            "These are all the borrowed books from the library...",
+        );
         this.loggerProvider.log(this.borrowedBooks);
     }
 }

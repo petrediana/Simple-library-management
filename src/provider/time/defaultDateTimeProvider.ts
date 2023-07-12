@@ -1,4 +1,4 @@
-import {DateTimeProvider} from "./contracts";
+import { DateTimeProvider } from "./contracts";
 
 export class DefaultDateTimeProvider implements DateTimeProvider {
     public getCurrentDateTime(): Date {
@@ -8,5 +8,4 @@ export class DefaultDateTimeProvider implements DateTimeProvider {
     public getCurrentTime(): number {
         return Date.now();
     }
-
 }

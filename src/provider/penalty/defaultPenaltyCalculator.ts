@@ -1,6 +1,6 @@
-import {PenaltyProvider} from "./contracts";
-import {DateTimeProvider} from "../time/contracts";
-import {Borrowed} from "../../book";
+import { PenaltyProvider } from "./contracts";
+import { DateTimeProvider } from "../time/contracts";
+import { Borrowed } from "../../book";
 
 export class DefaultPenaltyCalculator implements PenaltyProvider {
     private readonly dateTimeProvider: DateTimeProvider;
@@ -13,7 +13,9 @@ export class DefaultPenaltyCalculator implements PenaltyProvider {
         const borrowedDate = new Date(borrowed.borrowedDate);
         const returnDate = new Date(this.dateTimeProvider.getCurrentTime());
 
-        const daysDifference = (returnDate.getTime() - borrowedDate.getTime()) / (1000 * 3600 * 24);
+        const daysDifference =
+            (returnDate.getTime() - borrowedDate.getTime()) /
+            (1000 * 3600 * 24);
 
         if (daysDifference >= 15) {
             return borrowed.book.priceToBorrow * 0.01 * (daysDifference - 14);

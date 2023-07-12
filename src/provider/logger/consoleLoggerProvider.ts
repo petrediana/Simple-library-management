@@ -1,4 +1,4 @@
-import {LoggerProvider} from "./contracts";
+import { LoggerProvider } from "./contracts";
 
 export class ConsoleLoggerProvider implements LoggerProvider {
     public log(message: unknown): void {

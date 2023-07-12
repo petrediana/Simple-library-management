@@ -1,4 +1,4 @@
-import {Book} from "./book";
+import { Book } from "./book";
 
 export class Borrowed {
     private readonly _book: Book;
